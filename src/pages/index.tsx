@@ -14,6 +14,9 @@ export default function IndexPage() {
         <meta name="description" content="KyCodes offers unique, optimized, and accessible application development so you can make more." />
         <meta name="keywords" content="HTML, CSS, JS, JavaScript, React, React Native, Website, App" />
         <meta name="author" content="Kyler Fullerton" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500&display=swap" rel="stylesheet" />
       </Helmet>
       <Header />
       <Main />
