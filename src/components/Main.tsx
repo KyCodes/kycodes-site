@@ -10,11 +10,11 @@ export default function Main() {
                 <p>Make more!</p>
             </div>
             <a href='https://ideality.dev/' className={styles.card}>
-                <StaticImage layout='fullWidth' placeholder='blurred' className={styles.card__image} src='../images/ideality-banner.webp' alt="Ideality App Banner" />
+                <StaticImage placeholder='blurred' className={styles.card__image} src='../images/ideality-banner.webp' alt="Ideality App Banner" />
                 <p>Ideality</p>
             </a>
             <a href='https://honeylocustfilm.com/' className={styles.card}>
-                <StaticImage layout='fullWidth' placeholder='blurred' className={styles.card__image} src='../images/honeylocust-banner.webp' alt="Honey Locust Film Banner" />
+                <StaticImage placeholder='blurred' className={styles.card__image} src='../images/honeylocust-banner.webp' alt="Honey Locust Film Banner" />
                 <p>Honey Locust Film</p>
             </a>
         </div>
