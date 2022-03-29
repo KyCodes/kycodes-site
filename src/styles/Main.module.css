@@ -51,9 +51,8 @@
     position: absolute;
     top: 0px;
     left: 0px;
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
     border-radius: 8px;
+    overflow: hidden;
 }
 
 @media only screen and (max-width: 1016px) {
