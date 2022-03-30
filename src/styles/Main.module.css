@@ -46,7 +46,7 @@
     text-align: left;
 }
 
-.card__image {
+.card img {
     display: inline;
     position: absolute;
     top: 0px;
