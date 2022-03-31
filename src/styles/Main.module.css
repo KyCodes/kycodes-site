@@ -12,6 +12,8 @@
 
 .card {
     display: flex;
+    min-width: 300px;
+    min-height: 150px;
     max-width: 300px;
     max-height: 150px;
     height: 20vh;
