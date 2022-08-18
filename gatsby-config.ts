@@ -2,8 +2,8 @@ import type { GatsbyConfig } from "gatsby";
 
 const config: GatsbyConfig = {
   siteMetadata: {
-    title: `kycodes-site`,
-    siteUrl: `https://www.yourdomain.tld`
+    title: `KyCodes`,
+    siteUrl: `https://ky.codes`
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
@@ -12,12 +12,12 @@ const config: GatsbyConfig = {
   plugins: [{
     resolve: 'gatsby-source-wordpress',
     options: {
-      "url": "wp.ky.codes/graphql"
+      "url": "https://wp.ky.codes/graphql"
     }
   }, "gatsby-plugin-styled-components", {
     resolve: 'gatsby-plugin-google-analytics',
     options: {
-      "trackingId": "G-PNKR2FB6Q4"
+      "trackingId": "G-M3KMQMS4VY"
     }
   }, "gatsby-plugin-image", {
     resolve: 'gatsby-plugin-manifest',
