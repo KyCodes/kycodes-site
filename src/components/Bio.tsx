@@ -166,7 +166,7 @@ export default function Bio() {
         <RangeBio id='bio' />
         <h2>Bio</h2>
         <BioCard>
-          <GatsbyImage loading='lazy' 
+          <GatsbyImage 
           style={{
             position: 'absolute', 
             overflow: 'hidden',

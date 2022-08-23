@@ -106,7 +106,7 @@ export default function Movies() {
   const movies = data.allWpPost.nodes.map((data, index) =>
     <Movie key={index}>
       <h5>{data.title}</h5>
-      <GatsbyImage objectFit='cover' loading='lazy' image={data.featuredImage.node && getImage(data.featuredImage.node)} />
+      <GatsbyImage objectFit='cover' image={data.featuredImage.node && getImage(data.featuredImage.node)} />
       <p>{data.tags.nodes[0].name}</p>
     </Movie>
   );
