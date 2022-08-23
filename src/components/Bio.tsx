@@ -173,6 +173,9 @@ export default function Bio() {
             top: '-75px',
             borderRadius: '50%',
             border: '6px solid dimgray'
+          }} 
+          imgStyle={{
+            borderRadius: '50%',
           }} image={data.allWpPost.nodes[0].featuredImage.node && getImage(data.allWpPost.nodes[0].featuredImage.node)} alt='Photo of Kyler Fullerton with his girlfriend, Kylie, smiling.'/>
           <BioContent dangerouslySetInnerHTML={{__html: data.allWpPost.nodes[0].content}} />
           <BtnContainer>
