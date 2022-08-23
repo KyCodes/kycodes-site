@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { COLOR } from '../contstants';
 
 interface cardProps {
     title: string;
@@ -12,17 +13,23 @@ interface cardProps {
 export const CardWrapper = styled.div`
     position: relative;
     display: flex;
+    text-align: left;
     width: 100%;
     height: auto;
     overflow: hidden;
     margin: 1rem 0rem;
     background-color: darkgray;
     box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+    transition: all 0.3s ease-in-out;
     &:nth-child(even) {
         flex-direction: row-reverse;
         @media (max-width: 768px) {
            flex-direction: column;
         }
+    }
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0px 0px 20px rgba(0,0,0,0.3);
     }
     @media (max-width: 768px) {
         flex-direction: column;
@@ -77,8 +84,8 @@ export const Excerpt = styled.p`
     margin-bottom: 32px;
 `;
 
-export const Tag = styled.a`
-    cursor: pointer;
+export const Tag = styled.p`
+    display: inline;
     width: 100px;
     padding: 4px 8px;
     margin: 0px 4px;
@@ -108,12 +115,17 @@ export const PostLink = styled.a`
     color: #B48EAE;
     padding: 4px 8px;
     border-radius: 5px;
+    font-weight: 500;
     top: 12px;
     right: 12px;
     z-index: 10;
     transition-duration: 0.2s;
     cursor: pointer;
     text-decoration: none;
+    &:hover {
+        box-shadow: 3px 3px 0px ${COLOR.lightPurple};
+        transform: translateX(-3px) translateY(-3px);
+    }
 `;
 
 
@@ -132,7 +144,7 @@ export default function Card(props: cardProps) {
             </TagContainer>
         </CardDescription>
         <CardPreview>
-            <Preview id='test' src={props.sourceUrl} />
+            <Preview loading='lazy' placeholder='blurred' id='test' src={props.sourceUrl} />
         </CardPreview>
     </CardWrapper>
   );

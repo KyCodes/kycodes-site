@@ -3,15 +3,20 @@ import styled from 'styled-components';
 import Card from './Card';
 import maskProj from '../images/mask-proj.svg'
 import { useStaticQuery, graphql } from "gatsby"
+import { COLOR } from '../contstants';
 
 export const ProjectsContainer = styled.section`
   position: relative;
   width: 100%;
   padding: 32px 8vw;
   display: flex;
+  background: #B48EAE;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  color: ${COLOR.white};
+  font-weight: 200;
+  text-align: center;
 `;
 
 export const RangeProj = styled.div`
@@ -65,6 +70,7 @@ export default function Projects() {
       <RangeProj id='projects' />
       <h2>Projects</h2>
       {projects}
+      <p>Additionally, this site is on a headless WordPress setup utilizing GatsbyJS and updated with webhooks!</p>
     </ProjectsContainer>
   )
 }

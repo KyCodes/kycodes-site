@@ -7,11 +7,21 @@ interface navProps {
   $collapse?: boolean;
 }
 
+export const LogoAnchor = styled.a`
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+`;
+
 export const NavBar = styled.nav`
     z-index: 1000;
     height: 64px;
     background: rgba(255,255,255, 0.5);
     backdrop-filter: blur(5px);
+    border-bottom: 0.5px solid #632A50;
     width: 100%;
     position: fixed;
     padding: 0rem 1rem;
@@ -19,12 +29,6 @@ export const NavBar = styled.nav`
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    border-bottom: 0.5px solid #632A50;
-    & a:first-of-type {
-      position: relative;
-      margin-right: auto;
-      overflow: hidden;
-    }
     & a {
       text-transform: uppercase;
       transition-duration: 0.3s;
@@ -34,41 +38,36 @@ export const NavBar = styled.nav`
       font-size: 1.5rem;
       color: #632A50;
       text-decoration: none;
-      display: flex;
-      justify-content: center;
-      align-items: center;
     }
-    & a:hover {
+    & a:not(${LogoAnchor}):hover {
       transform: scale(1.1);
       text-shadow: 0px 0px 2px #632A50;
-    }
-    & img {
-      height: 40px;
     }
 `;
 
 export const AnchorWrapper = styled.ul<navProps>`
   display: flex;
-  backdrop-filter: blur(5px);
   transition-duration: 0.4s;
   transition-timing-function: ease-in-out;
   background-color: transparent;
   backdrop-filter: blur(0px);
   @media (max-width: 768px) {
-    transform: ${props => props.$collapse ? 'translateX(1rem)' : 'translateX(100%)'};
+    transform: ${props => props.$collapse ? 'translateX(1rem)' : 'translateX(calc(100% + 1rem))'};
     flex-direction: column;
     padding: 1rem 0rem;
     align-items: center;
     justify-content: space-evenly;
-    backdrop-filter: blur(5px) !important;
     top: 64px;
-    background: linear-gradient(270deg, rgba(255,255,255,0.9) 80%, rgba(103,76,11,0) 100%);
+    background: rgba(255,255,255,0.8);
+    border-left: 0.5px solid ${COLOR.darkPurple};
+    border-bottom: 0.5px solid ${COLOR.darkPurple};
+    border-bottom-left-radius: 3rem;
     position: fixed;
-    width: 50%;
+    width: 40%;
     height: 300px;
     a {
-      margin: auto;
-      height: auto;
+      width: 100%;
+      text-align: center;
     }
   }
 `;
@@ -112,14 +111,14 @@ export default function Nav(props: navProps) {
 
   return (
     <NavBar>
-      <a href='/'>
-        <StaticImage objectFit='contain' placeholder='blurred' src='../images/kycodes-short.webp' alt='KyCodes LLC icon'/>
-      </a>
+        <LogoAnchor href='/'>
+          <StaticImage width={35} objectFit='cover' placeholder='blurred' src='../images/kycodes-short.webp' alt='KyCodes LLC icon'/>
+        </LogoAnchor>
       <AnchorWrapper $collapse={ham}>
-        <a href='/#projects'>Projects</a>
-        <a href='/#bio'>Bio</a>
-        <a href='/#skills'>Skills</a>
-        <a href='/#contact'>Contact</a>
+        <a onClick={() => setHam(false)} href='/#projects'>Projects</a>
+        <a onClick={() => setHam(false)} href='/#bio'>Bio</a>
+        <a onClick={() => setHam(false)} href='/#skills'>Skills</a>
+        <a onClick={() => setHam(false)} href='/#contact'>Contact</a>
       </AnchorWrapper>
       <HamburgerWrapper onClick={() => setHam(!ham)}>
         <Hamburger $collapse={ham} />

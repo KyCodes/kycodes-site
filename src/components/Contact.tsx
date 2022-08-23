@@ -22,6 +22,7 @@ export const ContactContainer = styled.section`
       z-index: 20;
   }
   & input, textarea {
+    transition-duration: 0.3s;
     width: 100%;
     max-width: 400px;
     font-weight: 200;
@@ -38,6 +39,9 @@ export const ContactContainer = styled.section`
   & input::placeholder, textarea::placeholder {
     color: ${COLOR.white};
     opacity: 0.5;
+  }
+  & input:focus, textarea:focus {
+    border: 2px solid ${COLOR.darkPurple}
   }
   & textarea {
     height: 200px;
@@ -85,7 +89,7 @@ export const RangeChi = styled.div`
   mask-size: cover;
   transform: rotate(180deg);
   width: 100%;
-  height: 20vw;
+  height: 15vw;
   background: ${COLOR.darkPurple};
 `;
 
@@ -99,7 +103,7 @@ export const RangeKC = styled.div`
   mask-size: cover;
   z-index: 10;
   width: 100%;
-  height: 15vw;
+  height: 10vw;
   background: #B48EAE;
 `;
 

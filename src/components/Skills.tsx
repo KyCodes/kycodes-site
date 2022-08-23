@@ -8,14 +8,15 @@ export const SkillsContainer = styled.section`
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 100vh;
+    height: 50vh;
+    padding: 16px 8vw;
     background: #B48EAE;
     z-index: 10;
 `;
 
 export const RangeSkills = styled.div`
   position: absolute;
-  top: -15vw;
+  top: calc(-15vw + 5px);
   left: 0;
   mask-image: url(${maskSkills});
   mask-repeat: no-repeat;

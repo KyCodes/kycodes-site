@@ -15,9 +15,6 @@ export const HeaderContainer = styled.header`
   flex-direction: column;
   background-image: url(${background});
   background-repeat: repeat;
-  & img {
-    width: 300px;
-  }
   & h1 {
     color: #632A50;
     font-weight: 200;
@@ -61,7 +58,7 @@ export default function Header() {
     <HeaderContainer>
       <title>KyCodes</title>
       <meta name="description" content='KyCodes exceeds limits to build progressive and powerful web applications.' />
-      <StaticImage placeholder='blurred' src='../images/kycodes-full.png' alt='KyCodes LLC logo'/>
+      <StaticImage width={300} loading='eager' placeholder='blurred' src='../images/kycodes-full.png' alt='KyCodes LLC logo'/>
       <h1>I'm <span>Kyler</span>, let's create <span>powerful web apps</span></h1>
       <RangeHeader />
     </HeaderContainer>

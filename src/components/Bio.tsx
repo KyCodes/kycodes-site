@@ -1,8 +1,16 @@
-import { StaticImage } from 'gatsby-plugin-image';
-import React from 'react';
+import { GatsbyImage, getImage, StaticImage } from 'gatsby-plugin-image';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import maskBio from '../images/mask-bio.svg';
 import { useStaticQuery, graphql } from "gatsby"
+import { COLOR } from '../contstants';
+import Albums from './Albums';
+import Movies from './Movies';
+import Shows from './Shows';
+
+interface bioProps {
+  $select?: boolean;
+}
 
 export const BioContainer = styled.section`
     display: flex;
@@ -26,16 +34,18 @@ export const BioCard = styled.div`
   background: darkgray;
   margin: 100px 0rem 1rem 0rem;
   box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
-  & * {
-    overflow: visible;
-  }
-  & img {
+  /* & img {
     top: -50%;
     position: absolute;
     border-radius: 50%;
     width: 200px;
     aspect-ratio: 1 / 1;
   }
+  & img:nth-of-type(2) {
+    border: 5px solid dimgray;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+    z-index: 20;
+  } */
 `;
 
 export const BioContent = styled.span`
@@ -50,14 +60,49 @@ export const BioContent = styled.span`
     color: #632A50;
   }
 `
-
-export const MediaContainer = styled.span`
+export const BtnContainer = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
 `;
 
+export const Btn = styled.button<bioProps>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  flex: 1;
+  height: 50px;
+  color: ${props => props.$select ? '#B48EAE' : '#632A50'};
+  background: ${props => props.$select ? '#632A50' : '#B48EAE'};
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 1rem;
+  border: none;
+  margin: 0.5rem 0rem;
+  transition-duration: 0.2s;
+  &:nth-of-type(2) {
+    margin: 0.5rem 1rem;
+  }
+  &:hover {
+      box-shadow: 3px 3px 0px ${COLOR.darkPurple};
+      box-shadow: ${props => props.$select ? '3px 3px 0px #B48EAE' : '3px 3px 0px #632A50'};
+      transform: translateX(-3px) translateY(-3px);
+  }
+`;
+
+
+export const Carousel = styled.div`
+  position: relative;
+  display: flex;
+  width: 100%;
+  overflow-x: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+`;
 
 export const RangeBio = styled.div`
   position: absolute;
@@ -74,33 +119,72 @@ export const RangeBio = styled.div`
 
 
 export default function Bio() {
+  const [albums, setAlbums] = useState(true)
+  const [movies, setMovies] = useState(false)
+  const [shows, setShows] = useState(false)
+
   const data = useStaticQuery(graphql`
-    query {
+    {
       allWpPost(filter: {slug: {eq: "bio"}}) {
         nodes {
           content
+          featuredImage {
+            node {
+              gatsbyImage(aspectRatio: 1.1, width: 200, height: 200, formats: WEBP, placeholder: BLURRED)
+            }
+          }
         }
       }
     }
   `)
+
+  function scrollNav(category: string) {
+    const carousel = document.querySelector('#carousel')
+    if (category == 'albums') {
+      carousel.scrollLeft = 0;
+      setAlbums(true)
+      setMovies(false)
+      setShows(false)
+    }
+    if (category == 'movies') {
+      carousel.scrollLeft = carousel.clientWidth;
+      setAlbums(false)
+      setMovies(true)
+      setShows(false)
+    }
+    if (category == 'shows') {
+      carousel.scrollLeft = (carousel.clientWidth * 2);
+      setAlbums(false)
+      setMovies(false)
+      setShows(true)
+    }
+  }
+  console.log(data.allWpPost.nodes[0].featuredImage)
 
   return (
     <BioContainer>
         <RangeBio id='bio' />
         <h2>Bio</h2>
         <BioCard>
-          <StaticImage style={{position: 'absolute'}} imgStyle={{border: '5px solid dimgray', boxShadow: '0px 0px 10px rgba(0,0,0,0.5)'}} placeholder='blurred' src='../images/bio.webp' alt='Photo of Kyler Fullerton with his girlfriend, Kylie, smiling.'/>
+          <GatsbyImage loading='lazy' 
+          style={{
+            position: 'absolute', 
+            overflow: 'hidden',
+            top: '-75px',
+            borderRadius: '50%',
+            border: '6px solid dimgray'
+          }} image={data.allWpPost.nodes[0].featuredImage.node && getImage(data.allWpPost.nodes[0].featuredImage.node)} alt='Photo of Kyler Fullerton with his girlfriend, Kylie, smiling.'/>
           <BioContent dangerouslySetInnerHTML={{__html: data.allWpPost.nodes[0].content}} />
-          <MediaContainer>
-            <details>
-              <summary>Albums</summary>
-              <p>mac miller</p>
-            </details>
-            <details>
-              <summary>Movies</summary>
-              <p>babadook</p>
-            </details>
-          </MediaContainer>
+          <BtnContainer>
+            <Btn $select={albums} onClick={() => scrollNav('albums')}>Albums</Btn>
+            <Btn $select={movies} onClick={() => scrollNav('movies')}>Movies</Btn>
+            <Btn $select={shows} onClick={() => scrollNav('shows')}>Shows</Btn>
+          </BtnContainer>
+          <Carousel id='carousel'>
+            <Albums />
+            <Movies />
+            <Shows />
+          </Carousel>
         </BioCard>
     </BioContainer>
   );

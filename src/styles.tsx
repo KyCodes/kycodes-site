@@ -2,7 +2,6 @@ import { createGlobalStyle } from 'styled-components';
 import "@fontsource/mukta/200.css"
 import "@fontsource/mukta/500.css"
 import "@fontsource/mukta/800.css"
-import "@fontsource/gloria-hallelujah"
 import "@fontsource/zcool-qingke-huangyou"
  
 const GlobalStyle = createGlobalStyle`
@@ -18,6 +17,7 @@ const GlobalStyle = createGlobalStyle`
     text-transform: uppercase;
     font-size: 3.5rem;
     color: #f7f7f7;
+    letter-spacing: -2px;
   }
 
   html, 
