@@ -33,7 +33,7 @@ export const Show = styled.li`
   margin: 0rem 1rem;
   overflow: hidden;
   & * {
-    transition-duration: 0.2s;
+    transition-duration: 0.5s;
     transition-timing-function: ease-in-out;
   }
   & h5, p {

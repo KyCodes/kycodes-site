@@ -99,7 +99,7 @@ export const Carousel = styled.div`
   position: relative;
   display: flex;
   width: 100%;
-  overflow-x: hidden;
+  overflow-x: scroll;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
 `;
@@ -176,9 +176,9 @@ export default function Bio() {
           }} image={data.allWpPost.nodes[0].featuredImage.node && getImage(data.allWpPost.nodes[0].featuredImage.node)} alt='Photo of Kyler Fullerton with his girlfriend, Kylie, smiling.'/>
           <BioContent dangerouslySetInnerHTML={{__html: data.allWpPost.nodes[0].content}} />
           <BtnContainer>
-            <Btn $select={albums} onClick={() => scrollNav('albums')}>Albums</Btn>
-            <Btn $select={movies} onClick={() => scrollNav('movies')}>Movies</Btn>
-            <Btn $select={shows} onClick={() => scrollNav('shows')}>Shows</Btn>
+            <Btn $select={albums} onMouseDown={() => scrollNav('albums')}>Albums</Btn>
+            <Btn $select={movies} onMouseDown={() => scrollNav('movies')}>Movies</Btn>
+            <Btn $select={shows} onMouseDown={() => scrollNav('shows')}>Shows</Btn>
           </BtnContainer>
           <Carousel id='carousel'>
             <Albums />

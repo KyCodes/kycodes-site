@@ -37,7 +37,7 @@ export const Album = styled.li`
     transform: translateY(10%);
   }
   & * {
-    transition-duration: 0.2s;
+    transition-duration: 0.5s;
     transition-timing-function: ease-in-out;
   }
   & h5, p {
