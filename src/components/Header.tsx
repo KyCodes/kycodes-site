@@ -31,14 +31,6 @@ export const HeaderContainer = styled.header`
     transition-duration: 0.2s;
     background-size: cover;
   }
-  & span:hover {
-    background: radial-gradient(circle, rgba(255,225,155,1) 0%, rgba(208,163,67,1) 50%, rgba(103,76,11,1) 100%);
-    -webkit-text-fill-color: transparent;
-    -webkit-background-clip: text;
-    color: transparent;
-    text-shadow: none;
-    -webkit-text-stroke: 0.5px rgba(103,76,11,1);
-  }
 `;
 
 export const RangeHeader = styled.div`
@@ -52,10 +44,16 @@ export const RangeHeader = styled.div`
   background: #632A50;
 `;
 
+export const TopAnchor = styled.div`
+  position: absolute;
+  top: 0;
+`
+
 
 export default function Header() {
   return (
     <HeaderContainer>
+      <TopAnchor id='top'/>
       <title>KyCodes</title>
       <meta name="description" content='KyCodes exceeds limits to build progressive and powerful web applications.' />
       <StaticImage width={300} loading='eager' placeholder='blurred' src='../images/kycodes-full.png' alt='KyCodes LLC logo'/>

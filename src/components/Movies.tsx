@@ -21,7 +21,8 @@ export const MovieContainer = styled.ul`
 
 export const Movie = styled.li`
   position: relative;
-  filter: drop-shadow(5px 5px 0px rgba(0,0,0,0.5));
+  border: 1px solid black;
+  box-shadow: -5px -5px 0px rgba(0,0,0,0.5);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -71,7 +72,8 @@ export const Movie = styled.li`
   @media (max-width: 768px) {
       width: 40%;
       transform: translateX(-40%);
-      margin: 0.5rem 0rem;
+      /* margin: 0.5rem 0rem; */
+      margin-top: -2rem;
       &:nth-child(even) {
         transform: translateX(40%);
       }
@@ -105,7 +107,7 @@ export default function Movies() {
   const movies = data.allWpPost.nodes.map((data, index) =>
     <Movie key={index}>
       <h5>{data.title}</h5>
-      <GatsbyImage objectFit='cover' image={data.featuredImage.node && getImage(data.featuredImage.node)} />
+      <GatsbyImage style={{minWidth: '100%', minHeight: '100%'}} objectFit='cover' image={data.featuredImage.node && getImage(data.featuredImage.node)} />
       <p>{data.tags.nodes[0].name}</p>
     </Movie>
   );

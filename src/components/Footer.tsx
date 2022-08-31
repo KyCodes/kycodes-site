@@ -6,7 +6,7 @@ export const FooterContainer = styled.footer`
   width: 100%;
   background-color: dimgray;
   padding: 32px 4vw;
-  border-top: 0.5px solid black;
+  border-top: 1px solid black;
   box-shadow: inset 0px 10px 20px rgba(0,0,0,0.5);
   z-index: 10;
   font-weight: 200;
@@ -69,7 +69,7 @@ export default function Footer() {
         <a target="_blank" rel="noopener noreferrer" href='https://www.nimh.nih.gov/health/find-help'>Mental Health</a>
       </Socials>
       <Credit>
-        <a href='/'>Back to top</a>
+        <a href='/#top'>Back to top</a>
         <p>{`KyCodes LLC (${new Date().getFullYear()})`}</p>
       </Credit>
     </FooterContainer>

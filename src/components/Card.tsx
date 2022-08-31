@@ -1,3 +1,4 @@
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import React from 'react';
 import styled from 'styled-components';
 import { COLOR } from '../contstants';
@@ -10,66 +11,75 @@ interface cardProps {
     href: any;
 }
 
-export const CardWrapper = styled.div`
-    position: relative;
-    display: flex;
-    text-align: left;
-    width: 100%;
-    height: auto;
-    overflow: hidden;
-    margin: 1rem 0rem;
-    background-color: darkgray;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
-    transition: all 0.3s ease-in-out;
-    &:nth-child(even) {
-        flex-direction: row-reverse;
-        @media (max-width: 768px) {
-           flex-direction: column;
-        }
-    }
-    &:hover {
-        transform: translateY(-3px);
-        box-shadow: 0px 0px 20px rgba(0,0,0,0.3);
-    }
-    @media (max-width: 768px) {
-        flex-direction: column;
-    }
-`;
-
 export const CardDescription = styled.div`
     position: relative;
     width: 70%;
     min-height: 100%;
-    padding: 16px;
+    padding: 16px 24px;
     display: flex;
     flex-direction: column;
-    background-color: dimgray;
     z-index: 10;
     color: whitesmoke;
+    background-color: dimgray;
     @media (max-width: 768px) {
         min-width: 100%;
         height: auto;
     }
 `;
 
+export const CardWrapper = styled.div`
+    position: relative;
+    display: flex;
+    text-align: left;
+    width: 90%;
+    height: auto;
+    overflow: hidden;
+    border: 1px solid black;
+    margin: 1rem auto 1rem -1rem;
+    padding-left: 0.9rem;
+    box-shadow: 6px 6px 0px rgba(0,0,0,0.5);
+    transition: all 0.2s ease-in-out;
+    &:nth-child(even) {
+        margin: 1rem -1rem 1rem auto;
+        box-shadow: -6px 6px 0px rgba(0,0,0,0.5);
+        padding-right: 0.9rem;
+        padding-left: 0px;
+        flex-direction: row-reverse;
+        &:hover {
+            box-shadow: -12px 12px 0px rgba(0,0,0,0.5);
+        }
+        @media (max-width: 768px) {
+            flex-direction: column;
+        }
+    }
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 12px 12px 0px rgba(0,0,0,0.5);
+    }
+    &:hover img {
+        transform: scale(105%);
+    }
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
+    @media (min-width: 768px) {
+        max-height: 275px;
+    }
+`;
+
 export const CardPreview = styled.div`
     position: relative;
     display: grid;
+    background: silver;
     width: 30%;
     min-height: 100%;
     display: flex;
     justify-content: center;
+    overflow: hidden;
     align-items: center;
-    padding: 1rem;
     @media (max-width: 768px) {
         min-width: 100%;
     }
-`;
-
-export const Preview = styled.img`
-    max-width: 75%;
-    aspect-ratio: 16 / 9;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
 `;
 
 export const Title = styled.h3`
@@ -81,18 +91,19 @@ export const Excerpt = styled.p`
     width: 100%;
     color: silver;
     font-weight: 200;
-    margin-bottom: 32px;
+    margin-bottom: 48px;
 `;
 
 export const Tag = styled.p`
     display: inline;
+    cursor: default;
     width: 100px;
     padding: 4px 8px;
     margin: 0px 4px;
-    background: darkgray;
+    border: 3px solid gainsboro;
     border-radius: 25px;
     font-size: 0.75rem;
-    color: white;
+    color: gainsboro;
     font-weight: 500;
     white-space: nowrap;
     &:hover {
@@ -106,7 +117,7 @@ export const TagContainer = styled.div`
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 16px 8px;
+    padding: 16px;
 `;
 
 export const PostLink = styled.a`
@@ -117,7 +128,7 @@ export const PostLink = styled.a`
     border-radius: 5px;
     font-weight: 500;
     top: 12px;
-    right: 12px;
+    right: 16px;
     z-index: 10;
     transition-duration: 0.2s;
     cursor: pointer;
@@ -125,6 +136,10 @@ export const PostLink = styled.a`
     &:hover {
         box-shadow: 3px 3px 0px ${COLOR.lightPurple};
         transform: translateX(-3px) translateY(-3px);
+    }
+    &:active {
+        box-shadow: none;
+        transform: translateX(0px) translateY(0px);
     }
 `;
 
@@ -144,7 +159,7 @@ export default function Card(props: cardProps) {
             </TagContainer>
         </CardDescription>
         <CardPreview>
-            <Preview loading='lazy' placeholder='blurred' id='test' src={props.sourceUrl} />
+            <GatsbyImage style={{minHeight: '100%', minWidth: '100%'}} imgStyle={{transition: 'all 0.4s'}} objectFit='cover' image={props.sourceUrl && getImage(props.sourceUrl)} />
         </CardPreview>
     </CardWrapper>
   );

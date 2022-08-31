@@ -8,7 +8,7 @@ import { COLOR } from '../contstants';
 export const ProjectsContainer = styled.section`
   position: relative;
   width: 100%;
-  padding: 32px 8vw;
+  padding: 32px 0px;
   display: flex;
   background: #B48EAE;
   justify-content: center;
@@ -41,7 +41,7 @@ export default function Projects() {
           excerpt
           featuredImage {
             node {
-              sourceUrl
+              gatsbyImage(placeholder: BLURRED, aspectRatio: 16.10, width: 400, height: 225, formats: WEBP)
             }
           }
           tags {
@@ -59,7 +59,7 @@ export default function Projects() {
     <Card 
     title={data.title} 
     excerpt={data.excerpt}
-    sourceUrl={data.featuredImage.node.sourceUrl}
+    sourceUrl={data.featuredImage.node}
     tags={data.tags.nodes}
     href={`/${data.slug}`}
     key={index}/>

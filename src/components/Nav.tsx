@@ -8,7 +8,8 @@ interface navProps {
 }
 
 export const LogoAnchor = styled.a`
-  width: 100%;
+  flex: 1;
+  width: auto;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -21,7 +22,7 @@ export const NavBar = styled.nav`
     height: 64px;
     background: rgba(255,255,255, 0.5);
     backdrop-filter: blur(5px);
-    border-bottom: 0.5px solid #632A50;
+    border-bottom: 1px solid #632A50;
     width: 100%;
     position: fixed;
     padding: 0rem 1rem;
@@ -46,11 +47,12 @@ export const NavBar = styled.nav`
 `;
 
 export const AnchorWrapper = styled.ul<navProps>`
+  position: relative;
   display: flex;
   transition-duration: 0.4s;
   transition-timing-function: ease-in-out;
   background-color: transparent;
-  backdrop-filter: blur(0px);
+  overflow: hidden;
   @media (max-width: 768px) {
     transform: ${props => props.$collapse ? 'translateX(1rem)' : 'translateX(calc(100% + 1rem))'};
     flex-direction: column;
@@ -58,10 +60,10 @@ export const AnchorWrapper = styled.ul<navProps>`
     align-items: center;
     justify-content: space-evenly;
     top: 64px;
-    background: rgba(255,255,255,0.8);
     border-left: 0.5px solid ${COLOR.darkPurple};
     border-bottom: 0.5px solid ${COLOR.darkPurple};
     border-bottom-left-radius: 3rem;
+    background: rgba(255,255,255,0.8);
     position: fixed;
     width: 40%;
     height: 300px;
@@ -111,7 +113,7 @@ export default function Nav(props: navProps) {
 
   return (
     <NavBar>
-        <LogoAnchor href='/'>
+        <LogoAnchor href='#top'>
           <StaticImage width={35} objectFit='cover' placeholder='blurred' src='../images/kycodes-short.webp' alt='KyCodes LLC icon'/>
         </LogoAnchor>
       <AnchorWrapper $collapse={ham}>

@@ -20,8 +20,9 @@ export const AlbumContainer = styled.ul`
 `;
 
 export const Album = styled.li`
+  border: 1px solid black;
+  box-shadow: -5px -5px 0px rgba(0,0,0,0.5);
   position: relative;
-  filter: drop-shadow(5px 5px 0px rgba(0,0,0,0.5));
   aspect-ratio: 1/1;
   display: flex;
   flex-direction: column;
@@ -75,6 +76,7 @@ export const Album = styled.li`
   @media (max-width: 768px) {
       width: 50%;
       transform: translateX(-40%) translateY(0%);
+      margin-top: -2rem;
       &:nth-child(even) {
         transform: translateX(40%);
       }
@@ -109,7 +111,7 @@ export default function Albums() {
   const albums = data.allWpPost.nodes.map((data, index) =>
     <Album key={index}>
       <h5>{data.title}</h5>
-      <GatsbyImage objectFit='cover' image={data.featuredImage.node && getImage(data.featuredImage.node)} />
+      <GatsbyImage style={{minWidth: '100%', minHeight: '100%'}} objectFit='cover' image={data.featuredImage.node && getImage(data.featuredImage.node)} />
       <p>{data.tags.nodes[0].name}</p>
     </Album>
   );

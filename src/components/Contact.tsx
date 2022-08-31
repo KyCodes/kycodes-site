@@ -5,6 +5,7 @@ import background from '../images/back.webp'
 import maskChi from '../images/mask-chi.svg';
 import maskKC from '../images/mask-kc.svg';
 import emailJS from '@emailjs/browser'
+import ReCAPTCHA from "react-google-recaptcha";
 import { EMAILJS_API_KEY } from '../keys';
 
 export const ContactContainer = styled.section`
@@ -18,15 +19,15 @@ export const ContactContainer = styled.section`
   background-image: url(${background});
   background-repeat: repeat;
   & h2 {
-      color: ${COLOR.darkPurple};
-      z-index: 20;
+    text-shadow: 2px 2px 0px ${COLOR.darkPurple};
+    z-index: 20;
   }
   & input, textarea {
     transition-duration: 0.3s;
     width: 100%;
     max-width: 400px;
     font-weight: 200;
-    border: none;
+    border: 1px solid black;
     background-color: ${COLOR.lightPurple};
     border-radius: 6px;
     height: 36px;
@@ -34,17 +35,28 @@ export const ContactContainer = styled.section`
     padding: 8px;
     font-size: 1rem;
     outline: none;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
   }
   & input::placeholder, textarea::placeholder {
     color: ${COLOR.white};
     opacity: 0.5;
   }
-  & input:focus, textarea:focus {
-    border: 2px solid ${COLOR.darkPurple}
+  & input:focus, textarea:focus, input:not(:placeholder-shown), textarea:not(:placeholder-shown) {
+    transform: translate(3px, 3px);
+    box-shadow: -3px -3px 0px rgba(0,0,0,0.5);
+    z-index: 10;
+  }
+  & textarea:focus + button {
+    transform: translate(3px, 3px);
+    box-shadow: -3px -3px 0px rgba(0,0,0,0.5);
+  }
+  & input:not(:placeholder-shown):not(:focus):invalid {
+    color: darkred;
+  }
+  & input:not(:placeholder-shown):not(:focus):valid {
+    color: darkgreen;
   }
   & textarea {
-    height: 200px;
+    height: 300px;
     resize: none;
     border-radius: 6px 6px 0px 0px;
   }
@@ -56,6 +68,7 @@ export const ContactContainer = styled.section`
     color: ${COLOR.darkPurple}
   }
   & form {
+    position: relative;
     width: 400px;
     max-width: 100%;
     display: flex;
@@ -64,6 +77,7 @@ export const ContactContainer = styled.section`
     z-index: 20;
   }
   & button {
+    transition-duration: 0.3s;
     cursor: pointer;
     width: 100%;
     max-width: 400px;
@@ -71,12 +85,13 @@ export const ContactContainer = styled.section`
     border: none;
     background-color: ${COLOR.darkPurple};
     border-radius: 0px 0px 6px 6px;
+    border: 1px solid black;
+    border-top: none;
     height: 64px;
     color: ${COLOR.white};
     font-size: 1.25rem;
     text-transform: uppercase;
     outline: none;
-    box-shadow: 0px 5px 10px rgba(0,0,0,0.5);
   }
 `;
 
@@ -107,6 +122,12 @@ export const RangeKC = styled.div`
   background: #B48EAE;
 `;
 
+export const Verification = styled(ReCAPTCHA)`
+  position: absolute;
+  bottom: 80px;
+  z-index: 20;
+`;
+
 export default function Contact() {
   return (
     <ContactContainer>
@@ -118,6 +139,10 @@ export default function Contact() {
           e.currentTarget.reset()
           e.preventDefault()
         }} id='form'>
+            <Verification 
+                sitekey='6LfXTMAhAAAAAF3qmkkOElgDvMaceA9eQmtZvmZC'
+                onChange={(e) => console.log(e)}
+            />
             <label>Preferred Name</label>
             <input name='from_name' required placeholder='Preferred Name' />
             <label>Email</label>
