@@ -6,8 +6,7 @@ export const FooterContainer = styled.footer`
   width: 100%;
   background-color: dimgray;
   padding: 32px 4vw;
-  border-top: 1px solid black;
-  box-shadow: inset 0px 10px 20px rgba(0,0,0,0.5);
+  border-top: 2px solid black;
   z-index: 10;
   font-weight: 200;
   color: ${COLOR.white};

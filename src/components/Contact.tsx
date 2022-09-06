@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, createRef } from 'react';
 import styled from 'styled-components';
 import { COLOR } from '../contstants';
 import background from '../images/back.webp'
 import maskChi from '../images/mask-chi.svg';
 import maskKC from '../images/mask-kc.svg';
 import emailJS from '@emailjs/browser'
-import ReCAPTCHA from "react-google-recaptcha";
 import { EMAILJS_API_KEY } from '../keys';
 
 export const ContactContainer = styled.section`
@@ -19,15 +18,25 @@ export const ContactContainer = styled.section`
   background-image: url(${background});
   background-repeat: repeat;
   & h2 {
+    border-radius: 0px;
     text-shadow: 2px 2px 0px ${COLOR.darkPurple};
+    background: linear-gradient(0deg, rgba(180,142,174,0) 25%, rgba(180,142,174,1) 25%, rgba(180,142,174,1) 50%, rgba(180,142,174,0) 50%);
+    clip-path: polygon(0 0, 75% 0, 100% 100%, 25% 100%);
     z-index: 20;
+    border: none;
+    &::before {
+      border: none;
+    }
+    &::after {
+      border: none;
+    }
   }
   & input, textarea {
     transition-duration: 0.3s;
     width: 100%;
     max-width: 400px;
     font-weight: 200;
-    border: 1px solid black;
+    border: 2px solid black;
     background-color: ${COLOR.lightPurple};
     border-radius: 6px;
     height: 36px;
@@ -35,25 +44,25 @@ export const ContactContainer = styled.section`
     padding: 8px;
     font-size: 1rem;
     outline: none;
+    z-index: 10;
   }
   & input::placeholder, textarea::placeholder {
     color: ${COLOR.white};
     opacity: 0.5;
   }
   & input:focus, textarea:focus, input:not(:placeholder-shown), textarea:not(:placeholder-shown) {
-    transform: translate(3px, 3px);
-    box-shadow: -3px -3px 0px rgba(0,0,0,0.5);
-    z-index: 10;
+    transform: translate(4px, 4px);
+    box-shadow: -4px -4px 0px rgba(0,0,0,0.5);
   }
-  & textarea:focus + button {
-    transform: translate(3px, 3px);
-    box-shadow: -3px -3px 0px rgba(0,0,0,0.5);
+  & textarea:focus ~ button {
+    transform: translate(4px, 4px);
+    box-shadow: -4px -4px 0px rgba(0,0,0,0.5);
   }
   & input:not(:placeholder-shown):not(:focus):invalid {
-    color: darkred;
+    color: pink;
   }
   & input:not(:placeholder-shown):not(:focus):valid {
-    color: darkgreen;
+    color: lightgreen;
   }
   & textarea {
     height: 300px;
@@ -85,7 +94,7 @@ export const ContactContainer = styled.section`
     border: none;
     background-color: ${COLOR.darkPurple};
     border-radius: 0px 0px 6px 6px;
-    border: 1px solid black;
+    border: 2px solid black;
     border-top: none;
     height: 64px;
     color: ${COLOR.white};
@@ -122,12 +131,6 @@ export const RangeKC = styled.div`
   background: #B48EAE;
 `;
 
-export const Verification = styled(ReCAPTCHA)`
-  position: absolute;
-  bottom: 80px;
-  z-index: 20;
-`;
-
 export default function Contact() {
   return (
     <ContactContainer>
@@ -139,16 +142,12 @@ export default function Contact() {
           e.currentTarget.reset()
           e.preventDefault()
         }} id='form'>
-            <Verification 
-                sitekey='6LfXTMAhAAAAAF3qmkkOElgDvMaceA9eQmtZvmZC'
-                onChange={(e) => console.log(e)}
-            />
-            <label>Preferred Name</label>
-            <input name='from_name' required placeholder='Preferred Name' />
-            <label>Email</label>
-            <input type='email' name='reply_to' required placeholder='Email' />
-            <label>Message</label>
-            <textarea name='message' required placeholder='Message' />
+            <label htmlFor='from_name'>Preferred Name</label>
+            <input name='from_name' id='from_name' required placeholder='Preferred Name' />
+            <label htmlFor='email'>Email</label>
+            <input type='email' name='reply_to' id='reply_to' required placeholder='Email' />
+            <label htmlFor='message'>Message</label>
+            <textarea name='message' id='message' required placeholder='Message' />
             <button type='submit'>Send</button>
         </form>
     </ContactContainer>

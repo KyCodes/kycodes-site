@@ -23,6 +23,16 @@ export const BioContainer = styled.section`
     padding: 15vw 8vw 20vw 8vw;
     padding-top: max(15vw, 64px);
     background: #632A50;
+    & h2 {
+    border-color: ${COLOR.darkPurple};
+    &::before {
+      border-radius: 80% 20% 50% 50% / 50% 30% 70% 50%;
+      border-color: ${COLOR.lightPurple};
+    }
+    &::after {
+      border-color: ${COLOR.darkPurple};
+    }
+  }
 `;
 
 export const BioCard = styled.div`
@@ -32,11 +42,11 @@ export const BioCard = styled.div`
   border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
   align-items: center;
   width: 100%;
-  padding: 0px 24px;
+  padding: 0px 16px;
   background-image: url(${background});
   margin: 100px 0rem 1rem 0rem;
-  border: 1px solid black;
-  box-shadow: 6px 6px 0px rgba(0,0,0,0.5);
+  border: 2px solid black;
+  box-shadow: -8px -8px 0px rgba(0,0,0,0.5);
 `;
 
 export const BioContent = styled.span`
@@ -65,23 +75,22 @@ export const Btn = styled.button<bioProps>`
   align-items: center;
   cursor: pointer;
   text-decoration: none;
+  text-transform: uppercase;
   flex: 1;
   height: 50px;
-  color: #632A50;
-  background: #B48EAE;
-  padding: 4px 8px;
+  background: #632A50;
+  color: #B48EAE;
   border-radius: 5px;
   font-weight: 500;
   font-size: 1rem;
   border: none;
-  margin: 0.5rem 0rem;
   transition-duration: 0.2s;
   &:nth-of-type(2) {
     margin: 0.5rem 1rem;
   }
   &:hover {
-      box-shadow: 3px 3px 0px ${COLOR.darkPurple};
-      transform: translateX(-3px) translateY(-3px);
+      box-shadow: -4px -4px 0px ${COLOR.lightPurple};
+      transform: translateX(4px) translateY(4px);
   }
   &:active {
     transform: translateX(0px) translateY(0px);
@@ -140,47 +149,48 @@ export default function Bio() {
 
   function scrollNav(category: string) {
     const carousel = document.querySelector('#carousel')
-    if (category == 'albums') {
-      carousel.scrollLeft = 0;
-    }
-    if (category == 'movies') {
-      carousel.scrollLeft = carousel.clientWidth;
-    }
-    if (category == 'shows') {
-      carousel.scrollLeft = (carousel.clientWidth * 2);
+    if (carousel) {
+      if (category == 'albums') {
+        carousel.scrollLeft = 0;
+      }
+      if (category == 'movies') {
+        carousel.scrollLeft = carousel.clientWidth;
+      }
+      if (category == 'shows') {
+        carousel.scrollLeft = (carousel.clientWidth * 2);
+      }
     }
   }
 
   return (
     <BioContainer>
-        <RangeBio id='bio' />
-        <h2>Bio</h2>
-        <BioCard>
-          <GatsbyImage 
+      <RangeBio id='bio' />
+      <h2>Bio</h2>
+      <BioCard>
+        <GatsbyImage
           style={{
-            position: 'absolute', 
+            position: 'absolute',
             overflow: 'hidden',
             top: '-75px',
             borderRadius: '50%',
-            border: `2px solid black`,
-            // boxShadow: '3px 6px 0px rgba(0,0,0,0.5)'
-          }} 
+            border: `1px solid black`,
+            boxShadow: '-4px -4px 0px rgba(0,0,0,0.5)'
+          }}
           imgStyle={{
             borderRadius: '50%',
-            // border: `6px solid ${COLOR.lightPurple}`,
-          }} image={data.allWpPost.nodes[0].featuredImage.node && getImage(data.allWpPost.nodes[0].featuredImage.node)} alt='Photo of Kyler Fullerton with his girlfriend, Kylie, smiling.'/>
-          <BioContent dangerouslySetInnerHTML={{__html: data.allWpPost.nodes[0].content}} />
-          <BtnContainer>
-            <Btn onMouseDown={() => scrollNav('albums')}>Albums</Btn>
-            <Btn onMouseDown={() => scrollNav('movies')}>Movies</Btn>
-            <Btn onMouseDown={() => scrollNav('shows')}>Shows</Btn>
-          </BtnContainer>
-          <Carousel id='carousel'>
-            <Albums />
-            <Movies />
-            <Shows />
-          </Carousel>
-        </BioCard>
+          }} image={data.allWpPost.nodes[0].featuredImage.node && getImage(data.allWpPost.nodes[0].featuredImage.node)} alt='Photo of Kyler Fullerton with his girlfriend, Kylie, smiling.' />
+        <BioContent dangerouslySetInnerHTML={{ __html: data.allWpPost.nodes[0].content }} />
+        <BtnContainer>
+          <Btn onMouseDown={() => scrollNav('albums')}>Albums</Btn>
+          <Btn onMouseDown={() => scrollNav('movies')}>Movies</Btn>
+          <Btn onMouseDown={() => scrollNav('shows')}>Shows</Btn>
+        </BtnContainer>
+        <Carousel id='carousel'>
+          <Albums />
+          <Movies />
+          <Shows />
+        </Carousel>
+      </BioCard>
     </BioContainer>
   );
 }

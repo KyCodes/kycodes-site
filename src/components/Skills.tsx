@@ -31,6 +31,16 @@ export const SkillsContainer = styled.section`
     padding: 16px 8vw;
     background: #B48EAE;
     z-index: 10;
+      & h2 {
+      border-color: ${COLOR.lightPurple};
+      &::before {
+        border-radius: 35% 65% 60% 40% / 75% 50% 50% 25%;
+        border-color: ${COLOR.darkPurple};
+      }
+      &::after {
+        border-color: ${COLOR.lightPurple};
+      }
+    }
 `;
 
 export const RangeSkills = styled.div`
@@ -49,11 +59,12 @@ export const CardContainer = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
   position: relative;
   margin: 1rem 0rem;
   @media (max-width: 768px) {
       flex-direction: column;
-      margin: 3rem 0rem;
+      margin: 2rem 0rem;
   }
 `;
 
@@ -65,31 +76,31 @@ export const Card = styled.div`
   align-items: center;
   max-width: 500px;
   flex-direction: column;
-  background: rgba(255,255,255,0.75);
-  border: 1px solid black;
-  box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.5);
+  background: rgba(0,0,0,0.6);
+  border: 2px solid black;
+  box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.4);
   min-height: 300px;
-  margin: 0rem -1rem;
+  margin: 0rem -0.5rem;
   animation: ${blobMorph} 25s ease-in-out infinite alternate;
-  color: ${COLOR.darkGray};
+  color: ${COLOR.white};
   text-align: center;
   & h3 {
     font-size: 2.5rem;
-    color: transparent;
-    -webkit-text-stroke: 1px black;
-    text-shadow: 2px 2px 0px ${COLOR.lightPurple};
+    color: gainsboro;
+    font-family: "Indie Flower", cursive;
+  }
+  & p {
+    font-weight: 200;
   }
   &:nth-of-type(2) {
     animation-duration: 15s;
-    background: rgba(0, 0, 0, 0.5);
-    color: ${COLOR.white};
   }
   &:nth-of-type(3) {
     animation-duration: 20s;
   }
   @media (max-width: 768px) {
     width: 100%;
-    margin: -1rem 0rem;
+    margin: -0.5rem 0rem;
   }
 `;
 

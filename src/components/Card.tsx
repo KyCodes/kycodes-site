@@ -11,6 +11,10 @@ interface cardProps {
     href: any;
 }
 
+function randomNum(min: number, max: number) {
+    return Math.floor(Math.random() * (max - min) + min);
+}
+
 export const CardDescription = styled.div`
     position: relative;
     width: 70%;
@@ -28,25 +32,32 @@ export const CardDescription = styled.div`
 `;
 
 export const CardWrapper = styled.div`
+    border-radius: 0px ${randomNum(15,30)}px ${randomNum(15,30)}px 0px / 0px ${randomNum(200,400)}px ${randomNum(200,400)}px 0px;
     position: relative;
     display: flex;
     text-align: left;
     width: 90%;
     height: auto;
     overflow: hidden;
-    border: 1px solid black;
-    margin: 1rem auto 1rem -1rem;
-    padding-left: 0.9rem;
+    border: 2px solid black;
+    margin: 1rem auto 1rem -16px;
+    transform: translateZ(0px);
+    padding-left: 12px;
     box-shadow: 6px 6px 0px rgba(0,0,0,0.5);
     transition: all 0.2s ease-in-out;
     &:nth-child(even) {
-        margin: 1rem -1rem 1rem auto;
+        border-radius: ${randomNum(15,30)}px 0px 0px ${randomNum(15,30)}px / ${randomNum(200,400)}px 0px 0px ${randomNum(200,400)}px;
+        margin: 1rem -16px 1rem auto;
         box-shadow: -6px 6px 0px rgba(0,0,0,0.5);
-        padding-right: 0.9rem;
+        padding-right: 12px;
         padding-left: 0px;
         flex-direction: row-reverse;
         &:hover {
             box-shadow: -12px 12px 0px rgba(0,0,0,0.5);
+        }
+        & a:hover {
+            box-shadow: -4px 4px 0px ${COLOR.darkPurple};
+            transform: translateX(4px) translateY(-4px);
         }
         @media (max-width: 768px) {
             flex-direction: column;
@@ -100,7 +111,7 @@ export const Tag = styled.p`
     width: 100px;
     padding: 4px 8px;
     margin: 0px 4px;
-    border: 3px solid gainsboro;
+    border: 1px solid gainsboro;
     border-radius: 25px;
     font-size: 0.75rem;
     color: gainsboro;
@@ -122,8 +133,9 @@ export const TagContainer = styled.div`
 
 export const PostLink = styled.a`
     position: absolute;
-    background: #632A50;
-    color: #B48EAE;
+    text-transform: uppercase;
+    color: #632A50;
+    background: #B48EAE;
     padding: 4px 8px;
     border-radius: 5px;
     font-weight: 500;
@@ -134,8 +146,8 @@ export const PostLink = styled.a`
     cursor: pointer;
     text-decoration: none;
     &:hover {
-        box-shadow: 3px 3px 0px ${COLOR.lightPurple};
-        transform: translateX(-3px) translateY(-3px);
+        box-shadow: 4px 4px 0px ${COLOR.darkPurple};
+        transform: translateX(-4px) translateY(-4px);
     }
     &:active {
         box-shadow: none;
@@ -159,7 +171,7 @@ export default function Card(props: cardProps) {
             </TagContainer>
         </CardDescription>
         <CardPreview>
-            <GatsbyImage style={{minHeight: '100%', minWidth: '100%'}} imgStyle={{transition: 'all 0.4s'}} objectFit='cover' image={props.sourceUrl && getImage(props.sourceUrl)} />
+            <GatsbyImage style={{minHeight: '105%', minWidth: '100%'}} imgStyle={{transition: 'all 0.4s'}} objectFit='cover' image={props.sourceUrl && getImage(props.sourceUrl)} />
         </CardPreview>
     </CardWrapper>
   );

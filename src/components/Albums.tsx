@@ -21,7 +21,7 @@ export const AlbumContainer = styled.ul`
 
 export const Album = styled.li`
   border: 1px solid black;
-  box-shadow: -5px -5px 0px rgba(0,0,0,0.5);
+  box-shadow: -4px -4px 0px rgba(0,0,0,0.5);
   position: relative;
   aspect-ratio: 1/1;
   display: flex;

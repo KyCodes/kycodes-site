@@ -17,6 +17,16 @@ export const ProjectsContainer = styled.section`
   color: ${COLOR.white};
   font-weight: 200;
   text-align: center;
+  & h2 {
+    border-color: ${COLOR.lightPurple};
+    &::before {
+      border-radius: 60% 40% 40% 60% / 50% 35% 65% 50%;
+      border-color: ${COLOR.darkPurple};
+    }
+    &::after {
+      border-color: ${COLOR.lightPurple};
+    }
+  }
 `;
 
 export const RangeProj = styled.div`

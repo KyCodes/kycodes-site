@@ -20,9 +20,9 @@ export const LogoAnchor = styled.a`
 export const NavBar = styled.nav`
     z-index: 1000;
     height: 64px;
-    background: rgba(255,255,255, 0.5);
+    background: rgba(255,255,255, 0.7);
     backdrop-filter: blur(5px);
-    border-bottom: 1px solid #632A50;
+    border-bottom: 2px solid #632A50;
     width: 100%;
     position: fixed;
     padding: 0rem 1rem;
@@ -60,15 +60,15 @@ export const AnchorWrapper = styled.ul<navProps>`
     align-items: center;
     justify-content: space-evenly;
     top: 64px;
-    border-left: 0.5px solid ${COLOR.darkPurple};
-    border-bottom: 0.5px solid ${COLOR.darkPurple};
+    border-left: 2px solid ${COLOR.darkPurple};
+    border-bottom: 2px solid ${COLOR.darkPurple};
     border-bottom-left-radius: 3rem;
-    background: rgba(255,255,255,0.8);
+    background: rgba(255,255,255,0.9);
     position: fixed;
     width: 40%;
-    height: 300px;
     a {
       width: 100%;
+      padding: 1rem 0rem;
       text-align: center;
     }
   }
@@ -113,7 +113,7 @@ export default function Nav(props: navProps) {
 
   return (
     <NavBar>
-        <LogoAnchor href='#top'>
+        <LogoAnchor href='/#top'>
           <StaticImage width={35} objectFit='cover' placeholder='blurred' src='../images/kycodes-short.webp' alt='KyCodes LLC icon'/>
         </LogoAnchor>
       <AnchorWrapper $collapse={ham}>

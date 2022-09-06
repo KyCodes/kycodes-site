@@ -22,7 +22,7 @@ export const MovieContainer = styled.ul`
 export const Movie = styled.li`
   position: relative;
   border: 1px solid black;
-  box-shadow: -5px -5px 0px rgba(0,0,0,0.5);
+  box-shadow: -4px -4px 0px rgba(0,0,0,0.5);
   display: flex;
   flex-direction: column;
   align-items: center;
