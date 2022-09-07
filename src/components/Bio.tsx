@@ -112,11 +112,7 @@ export const LinkContainer = styled.div`
   border-radius: 6px;
   & a {
     color: inherit;
-    text-decoration: none;
     padding: 4px 16px;
-    &:hover {
-      text-decoration: underline;
-    }
   }
   & p {
     cursor: default;
