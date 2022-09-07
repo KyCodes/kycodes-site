@@ -53,7 +53,7 @@ export const BioContent = styled.span`
   z-index: 10;
   width: 100%;
   height: 100%;
-  padding-top: 150px;
+  padding-top: calc(125px + 1rem);
   font-weight: 200;
   font-size: 1.25rem;
   text-align: center;
@@ -79,7 +79,7 @@ export const Btn = styled.button<bioProps>`
   flex: 1;
   height: 50px;
   background: #632A50;
-  color: #B48EAE;
+  color: ${COLOR.white};
   border-radius: 5px;
   font-weight: 500;
   font-size: 1rem;
@@ -98,6 +98,31 @@ export const Btn = styled.button<bioProps>`
   }
 `;
 
+export const LinkContainer = styled.div`
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 95px;
+  background: dimgray;
+  color: ${COLOR.white};
+  border: 1px solid black;
+  text-transform: uppercase;
+  font-weight: 800;
+  z-index: 30;
+  border-radius: 6px;
+  & a {
+    color: inherit;
+    text-decoration: none;
+    padding: 4px 16px;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  & p {
+    cursor: default;
+    opacity: 0.4;
+  }
+`
 
 export const Carousel = styled.div`
   position: relative;
@@ -139,6 +164,7 @@ export default function Bio() {
           content
           featuredImage {
             node {
+              altText
               gatsbyImage(aspectRatio: 1.1, width: 200, height: 200, formats: WEBP, placeholder: BLURRED)
             }
           }
@@ -167,6 +193,11 @@ export default function Bio() {
       <RangeBio id='bio' />
       <h2>Bio</h2>
       <BioCard>
+        <LinkContainer>
+          <a target="_blank" rel="noopener noreferrer" href='https://github.com/KyCodes'>CV</a>
+          <p>|</p>
+          <a target="_blank" rel="noopener noreferrer" href='https://github.com/KyCodes'>Git</a>
+        </LinkContainer>
         <GatsbyImage
           style={{
             position: 'absolute',
@@ -174,11 +205,11 @@ export default function Bio() {
             top: '-75px',
             borderRadius: '50%',
             border: `1px solid black`,
-            boxShadow: '-4px -4px 0px rgba(0,0,0,0.5)'
+            boxShadow: '-4px -4px 0px rgba(0,0,0,0.5)',
           }}
           imgStyle={{
             borderRadius: '50%',
-          }} image={data.allWpPost.nodes[0].featuredImage.node && getImage(data.allWpPost.nodes[0].featuredImage.node)} alt='Photo of Kyler Fullerton with his girlfriend, Kylie, smiling.' />
+          }} image={data.allWpPost.nodes[0].featuredImage.node && getImage(data.allWpPost.nodes[0].featuredImage.node)} alt={data.allWpPost.nodes[0].featuredImage.node.altText} />
         <BioContent dangerouslySetInnerHTML={{ __html: data.allWpPost.nodes[0].content }} />
         <BtnContainer>
           <Btn onMouseDown={() => scrollNav('albums')}>Albums</Btn>

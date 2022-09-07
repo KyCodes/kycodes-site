@@ -94,6 +94,7 @@ export default function Albums() {
           excerpt
           featuredImage {
             node {
+              altText
               gatsbyImage(placeholder: BLURRED, aspectRatio: 1.1, width: 400, height: 400, formats: WEBP)
             }
           }
@@ -108,10 +109,10 @@ export default function Albums() {
     }
   `)
 
-  const albums = data.allWpPost.nodes.map((data, index) =>
+  const albums = data.allWpPost.nodes.map((data: any, index: number) =>
     <Album key={index}>
       <h5>{data.title}</h5>
-      <GatsbyImage style={{minWidth: '100%', minHeight: '100%'}} objectFit='cover' image={data.featuredImage.node && getImage(data.featuredImage.node)} />
+      <GatsbyImage alt={data.featuredImage.node.altText} style={{minWidth: '100%', minHeight: '100%'}} objectFit='cover' image={data.featuredImage.node && getImage(data.featuredImage.node)} />
       <p>{data.tags.nodes[0].name}</p>
     </Album>
   );

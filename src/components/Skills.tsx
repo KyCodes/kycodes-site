@@ -62,31 +62,31 @@ export const CardContainer = styled.div`
   justify-content: center;
   position: relative;
   margin: 1rem 0rem;
-  @media (max-width: 768px) {
+  @media (max-width: 992px) {
       flex-direction: column;
       margin: 2rem 0rem;
   }
 `;
 
 export const Card = styled.div`
+  position: relative;
   flex: 1;
   display: flex;
-  /* justify-content: center; */
-  padding: 32px;
+  padding: 64px 64px 0px 64px;
+  max-width: 400px;
   align-items: center;
-  max-width: 500px;
   flex-direction: column;
   background: rgba(0,0,0,0.6);
   border: 2px solid black;
   box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.4);
-  min-height: 300px;
   margin: 0rem -0.5rem;
   animation: ${blobMorph} 25s ease-in-out infinite alternate;
-  color: ${COLOR.white};
+  color: silver;
   text-align: center;
+  z-index: 30;
   & h3 {
     font-size: 2.5rem;
-    color: gainsboro;
+    color: ${COLOR.white};
     font-family: "Indie Flower", cursive;
   }
   & p {
@@ -94,14 +94,41 @@ export const Card = styled.div`
   }
   &:nth-of-type(2) {
     animation-duration: 15s;
+    z-index: 20;
   }
   &:nth-of-type(3) {
     animation-duration: 20s;
+    z-index: 10;
   }
-  @media (max-width: 768px) {
-    width: 100%;
-    margin: -0.5rem 0rem;
+  @media (max-width: 992px) {
+      width: 100%;
+      margin: -0.5rem -2rem;
+      transform: translateX(-10%);
+      &:nth-child(odd) {
+        transform: translateX(10%);
+      }
   }
+`;
+
+export const TagContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+`
+
+export const Tag = styled.p`
+    border: 1px solid black;
+    display: inline;
+    cursor: default;
+    padding: 4px 8px;
+    margin: 4px;
+    border-radius: 25px;
+    font-size: 0.75rem;
+    background-color: gainsboro;
+    color: black;    
+    font-weight: 500;
+    white-space: nowrap;
 `;
 
 
@@ -109,6 +136,10 @@ export default function Skills() {
   const [design, setDesign] = useState('')
   const [develop, setDevelop] = useState('')
   const [deploy, setDeploy] = useState('')
+  const [designTags, setDesignTags] = useState(Function)
+  const [developTags, setDevelopTags] = useState(Function)
+  const [deployTags, setDeployTags] = useState(Function)
+
 
   const data = useStaticQuery(graphql`
     {
@@ -121,6 +152,12 @@ export default function Skills() {
               gatsbyImage(aspectRatio: 1.1, width: 200, height: 200, formats: WEBP, placeholder: BLURRED)
             }
           }
+          tags {
+            nodes {
+              link
+              name
+            }
+          }
         }
       }
     }
@@ -128,14 +165,24 @@ export default function Skills() {
 
   useEffect(() => {
     for (let i = 0; i < data.allWpPost.nodes.length; i++) {
-      if (data.allWpPost.nodes[i].slug == 'design') {
-        setDesign(data.allWpPost.nodes[i].content)
-      } else if (data.allWpPost.nodes[i].slug == 'develop') {
-        setDevelop(data.allWpPost.nodes[i].content)
-      } else if (data.allWpPost.nodes[i].slug == 'deploy') {
-        setDeploy(data.allWpPost.nodes[i].content)
+      const wpData = data.allWpPost.nodes[i];
+      if (wpData.slug == 'design') {
+        setDesign(wpData.content)
+        setDesignTags(wpData.tags.nodes.map((data: any, index: number) =>
+          <Tag key={index}>{data.name}</Tag>
+        ));
+      } else if (wpData.slug == 'develop') {
+        setDevelop(wpData.content)
+        setDevelopTags(wpData.tags.nodes.map((data: any, index: number) =>
+          <Tag key={index}>{data.name}</Tag>
+        ));      
+      } else if (wpData.slug == 'deploy') {
+        setDeploy(wpData.content)
+        setDeployTags(wpData.tags.nodes.map((data: any, index: number) =>
+          <Tag key={index}>{data.name}</Tag>
+        ));
       }
-    }    
+    }
   }, [data])
 
   return (
@@ -144,16 +191,22 @@ export default function Skills() {
         <h2>Skills</h2>
         <CardContainer>
           <Card>
-            <h3>Design</h3>
-            <p dangerouslySetInnerHTML={{__html: design}} />
+              <h3>Design</h3>
+              <p dangerouslySetInnerHTML={{__html: design}} />
+              {/* @ts-ignore */}
+              <TagContainer>{designTags}</TagContainer>
           </Card>
           <Card>
             <h3>Develop</h3>
             <p dangerouslySetInnerHTML={{__html: develop}} />
+            {/* @ts-ignore */}
+            <TagContainer>{developTags}</TagContainer>
           </Card>
           <Card>
             <h3>Deploy</h3>
             <p dangerouslySetInnerHTML={{__html: deploy}} />
+            {/* @ts-ignore */}
+            <TagContainer>{deployTags}</TagContainer>
           </Card>
         </CardContainer>
     </SkillsContainer>

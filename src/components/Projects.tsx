@@ -51,6 +51,7 @@ export default function Projects() {
           excerpt
           featuredImage {
             node {
+              altText
               gatsbyImage(placeholder: BLURRED, aspectRatio: 16.10, width: 400, height: 225, formats: WEBP)
             }
           }
@@ -65,8 +66,9 @@ export default function Projects() {
     }
   `)
   
-  const projects = data.allWpPost.nodes.map((data, index) =>
+  const projects = data.allWpPost.nodes.map((data: any, index: number) =>
     <Card 
+    alt={data.featuredImage.node.altText}
     title={data.title} 
     excerpt={data.excerpt}
     sourceUrl={data.featuredImage.node}

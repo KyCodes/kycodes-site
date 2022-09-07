@@ -24,7 +24,7 @@ export const HeaderContainer = styled.header`
     color: #632A50;
     font-weight: 200;
     text-align: center;
-    padding: 0px 8px;
+    padding: 0px 32px;
     margin: 8px 0px;
     line-height: 2rem;
     text-shadow: 0px 0px 5px white;
@@ -63,7 +63,7 @@ export default function Header() {
       <TopAnchor id='top'/>
       <title>KyCodes</title>
       <meta name="description" content='KyCodes exceeds limits to build progressive and powerful web applications.' />
-      <StaticImage width={300} loading='eager' placeholder='blurred' src='../images/kycodes-full.png' alt='KyCodes LLC logo'/>
+      <StaticImage formats={["webp"]} width={300} loading='eager' placeholder='blurred' src='../images/kycodes-full.png' alt='KyCodes LLC full-size logo'/>
       <h1>I'm <strong>Kyler</strong>, let's create <strong>powerful web apps</strong><Blink>|</Blink></h1>
       <RangeHeader />
     </HeaderContainer>

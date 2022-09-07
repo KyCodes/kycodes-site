@@ -90,6 +90,7 @@ export default function Movies() {
           excerpt
           featuredImage {
             node {
+              altText
               gatsbyImage(placeholder: BLURRED, aspectRatio: 2.3, width: 400, height: 600, formats: WEBP)
             }
           }
@@ -104,10 +105,10 @@ export default function Movies() {
     }
   `)
 
-  const movies = data.allWpPost.nodes.map((data, index) =>
+  const movies = data.allWpPost.nodes.map((data: any, index: number) =>
     <Movie key={index}>
       <h5>{data.title}</h5>
-      <GatsbyImage style={{minWidth: '100%', minHeight: '100%'}} objectFit='cover' image={data.featuredImage.node && getImage(data.featuredImage.node)} />
+      <GatsbyImage alt={data.featuredImage.node.altText} style={{minWidth: '100%', minHeight: '100%'}} objectFit='cover' image={data.featuredImage.node && getImage(data.featuredImage.node)} />
       <p>{data.tags.nodes[0].name}</p>
     </Movie>
   );

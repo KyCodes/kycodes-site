@@ -1,3 +1,4 @@
+import { Link } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import React from 'react';
 import styled from 'styled-components';
@@ -9,6 +10,7 @@ interface cardProps {
     tags: any;
     sourceUrl: any;
     href: any;
+    alt: string;
 }
 
 function randomNum(min: number, max: number) {
@@ -53,10 +55,11 @@ export const CardWrapper = styled.div`
         padding-left: 0px;
         flex-direction: row-reverse;
         &:hover {
+            transform: translateY(-3px) translateX(3px);
             box-shadow: -12px 12px 0px rgba(0,0,0,0.5);
         }
         & a:hover {
-            box-shadow: -4px 4px 0px ${COLOR.darkPurple};
+            box-shadow: -4px 4px 0px ${COLOR.lightPurple};
             transform: translateX(4px) translateY(-4px);
         }
         @media (max-width: 768px) {
@@ -64,7 +67,7 @@ export const CardWrapper = styled.div`
         }
     }
     &:hover {
-        transform: translateY(-3px);
+        transform: translateY(-3px) translateX(-3px);
         box-shadow: 12px 12px 0px rgba(0,0,0,0.5);
     }
     &:hover img {
@@ -73,7 +76,7 @@ export const CardWrapper = styled.div`
     @media (max-width: 768px) {
         flex-direction: column;
     }
-    @media (min-width: 768px) {
+    @media (min-width: 992px) {
         max-height: 275px;
     }
 `;
@@ -108,7 +111,6 @@ export const Excerpt = styled.p`
 export const Tag = styled.p`
     display: inline;
     cursor: default;
-    width: 100px;
     padding: 4px 8px;
     margin: 0px 4px;
     border: 1px solid gainsboro;
@@ -129,24 +131,25 @@ export const TagContainer = styled.div`
     left: 0;
     width: 100%;
     padding: 16px;
+    mask-image: linear-gradient(90deg, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
 `;
 
-export const PostLink = styled.a`
+export const PostLink = styled(Link)`
     position: absolute;
     text-transform: uppercase;
-    color: #632A50;
-    background: #B48EAE;
+    color: ${COLOR.white};
+    background: ${COLOR.darkPurple};
     padding: 4px 8px;
     border-radius: 5px;
     font-weight: 500;
-    top: 12px;
-    right: 16px;
+    top: 16px;
+    right: 24px;
     z-index: 10;
     transition-duration: 0.2s;
     cursor: pointer;
     text-decoration: none;
     &:hover {
-        box-shadow: 4px 4px 0px ${COLOR.darkPurple};
+        box-shadow: 4px 4px 0px ${COLOR.lightPurple};
         transform: translateX(-4px) translateY(-4px);
     }
     &:active {
@@ -157,21 +160,21 @@ export const PostLink = styled.a`
 
 
 export default function Card(props: cardProps) {
-    const tags = props.tags.map((data, index) =>
+    const tags = props.tags.map((data: any, index: number) =>
         <Tag key={index}>{data.name}</Tag>
     );
   return (
     <CardWrapper>
         <CardDescription>
             <Title>{props.title}</Title>
-            <PostLink href={props.href}>Read More</PostLink>
+            <PostLink to={props.href}>Read More</PostLink>
             <Excerpt dangerouslySetInnerHTML={{__html: props.excerpt}}/>
             <TagContainer>
                 {tags} 
             </TagContainer>
         </CardDescription>
         <CardPreview>
-            <GatsbyImage style={{minHeight: '105%', minWidth: '100%'}} imgStyle={{transition: 'all 0.4s'}} objectFit='cover' image={props.sourceUrl && getImage(props.sourceUrl)} />
+            <GatsbyImage alt={props.alt} style={{minHeight: '105%', minWidth: '100%'}} imgStyle={{transition: 'all 0.4s'}} objectFit='cover' image={props.sourceUrl && getImage(props.sourceUrl)} />
         </CardPreview>
     </CardWrapper>
   );

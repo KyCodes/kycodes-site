@@ -20,14 +20,13 @@ export const HeaderContainer = styled.header`
   background-image: url(${background});
   background-repeat: repeat;
   & h1 {
-    color: #632A50;
+    color: transparent;
+    -webkit-text-stroke: 1px black;
     font-size: 4rem;
     text-align: center;
     padding: 0px 8px;
     margin: 8px 0px;
-    line-height: 2rem;
-    text-shadow: 0px 0px 5px white;
-    font-family: "ZCOOL QingKe HuangYou", cursive;
+    text-shadow: 2px 2px 0px #632A50;
   }
 `;
 

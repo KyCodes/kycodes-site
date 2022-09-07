@@ -7,7 +7,11 @@ import maskKC from '../images/mask-kc.svg';
 import emailJS from '@emailjs/browser'
 import { EMAILJS_API_KEY } from '../keys';
 
-export const ContactContainer = styled.section`
+interface contactProps {
+  $disabled?: boolean;
+}
+
+export const ContactContainer = styled.section<contactProps>`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -33,6 +37,7 @@ export const ContactContainer = styled.section`
   }
   & input, textarea {
     transition-duration: 0.3s;
+    cursor: ${props => props.$disabled ?  'not-allowed' : 'text'};
     width: 100%;
     max-width: 400px;
     font-weight: 200;
@@ -42,6 +47,7 @@ export const ContactContainer = styled.section`
     height: 36px;
     color: ${COLOR.white};
     padding: 8px;
+    overflow: visible;
     font-size: 1rem;
     outline: none;
     z-index: 10;
@@ -51,17 +57,15 @@ export const ContactContainer = styled.section`
     opacity: 0.5;
   }
   & input:focus, textarea:focus, input:not(:placeholder-shown), textarea:not(:placeholder-shown) {
-    transform: translate(4px, 4px);
-    box-shadow: -4px -4px 0px rgba(0,0,0,0.5);
+    background: ${COLOR.darkPurple};
   }
-  & textarea:focus ~ button {
-    transform: translate(4px, 4px);
-    box-shadow: -4px -4px 0px rgba(0,0,0,0.5);
+  & form:valid button {
+    background: ${props => props.$disabled ?  COLOR.darkPurple : COLOR.lightPurple};
   }
   & input:not(:placeholder-shown):not(:focus):invalid {
     color: pink;
   }
-  & input:not(:placeholder-shown):not(:focus):valid {
+  & input:nth-of-type(2):not(:placeholder-shown):not(:focus):valid {
     color: lightgreen;
   }
   & textarea {
@@ -84,10 +88,13 @@ export const ContactContainer = styled.section`
     align-items: center;
     flex-direction: column;
     z-index: 20;
+    & :not(p) {
+      filter: ${props => props.$disabled ?  'brightness(50%)' : 'brightness(100%)'};
+    }
   }
   & button {
     transition-duration: 0.3s;
-    cursor: pointer;
+    cursor: ${props => props.$disabled ?  'not-allowed' : 'pointer'};
     width: 100%;
     max-width: 400px;
     font-weight: 800;
@@ -101,6 +108,24 @@ export const ContactContainer = styled.section`
     font-size: 1.25rem;
     text-transform: uppercase;
     outline: none;
+  }
+  & p {
+    display: ${props => props.$disabled ? 'flex' : 'none'};
+    position: absolute;
+    bottom: 64px;
+    z-index: 20;
+    width: 100%;
+    border-radius: 6px 6px 0px 0px;
+    border: 2px solid black;
+    border-bottom: none;
+    justify-content: center;
+    align-items: center;
+    font-weight: 200;
+    padding: 0px 16px;
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(5px);
+    text-align: center;
+    height: 100px;
   }
 `;
 
@@ -132,8 +157,9 @@ export const RangeKC = styled.div`
 `;
 
 export default function Contact() {
+  const [disabled, setDisabled] = useState(false)
   return (
-    <ContactContainer>
+    <ContactContainer $disabled={disabled}>
       <RangeChi id='contact' />
       <RangeKC />
         <h2>Contact</h2>
@@ -141,14 +167,16 @@ export default function Contact() {
           emailJS.sendForm('service_eaytc49', 'template_f4aq5kq', '#form', EMAILJS_API_KEY)
           e.currentTarget.reset()
           e.preventDefault()
+          setDisabled(true)
         }} id='form'>
             <label htmlFor='from_name'>Preferred Name</label>
-            <input name='from_name' id='from_name' required placeholder='Preferred Name' />
+            <input disabled={disabled} name='from_name' id='from_name' required placeholder='Preferred Name' />
             <label htmlFor='email'>Email</label>
-            <input type='email' name='reply_to' id='reply_to' required placeholder='Email' />
+            <input disabled={disabled} type='email' name='reply_to' id='reply_to' required placeholder='Email' />
             <label htmlFor='message'>Message</label>
-            <textarea name='message' id='message' required placeholder='Message' />
-            <button type='submit'>Send</button>
+            <textarea disabled={disabled} name='message' id='message' required placeholder='Message' />
+            <p>Thank you for your interest! I'll get back to you as soon as possible!</p>
+            <button disabled={disabled} type='submit'>Send</button>
         </form>
     </ContactContainer>
   );

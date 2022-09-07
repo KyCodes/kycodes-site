@@ -114,7 +114,7 @@ export default function Nav(props: navProps) {
   return (
     <NavBar>
         <LogoAnchor href='/#top'>
-          <StaticImage width={35} objectFit='cover' placeholder='blurred' src='../images/kycodes-short.webp' alt='KyCodes LLC icon'/>
+          <StaticImage formats={["webp"]} width={35} objectFit='cover' placeholder='blurred' src='../images/kycodes-short.webp' alt='KyCodes LLC icon logo'/>
         </LogoAnchor>
       <AnchorWrapper $collapse={ham}>
         <a onClick={() => setHam(false)} href='/#projects'>Projects</a>
