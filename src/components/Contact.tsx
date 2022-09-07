@@ -93,17 +93,17 @@ export const ContactContainer = styled.section<contactProps>`
     }
   }
   & button {
+    margin-top: -5px;
     transition-duration: 0.3s;
     cursor: ${props => props.$disabled ?  'not-allowed' : 'pointer'};
     width: 100%;
     max-width: 400px;
     font-weight: 800;
-    border: none;
     background-color: ${COLOR.darkPurple};
     border-radius: 0px 0px 6px 6px;
     border: 2px solid black;
     border-top: none;
-    height: 64px;
+    height: calc(64px + 5px);
     color: ${COLOR.white};
     font-size: 1.25rem;
     text-transform: uppercase;
