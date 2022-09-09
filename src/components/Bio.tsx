@@ -52,7 +52,6 @@ export const BioCard = styled.div`
 export const BioContent = styled.span`
   z-index: 10;
   width: 100%;
-  height: 100%;
   padding-top: calc(125px + 1rem);
   font-weight: 200;
   font-size: 1.25rem;

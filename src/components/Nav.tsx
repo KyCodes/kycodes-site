@@ -53,13 +53,14 @@ export const AnchorWrapper = styled.ul<navProps>`
   transition-timing-function: ease-in-out;
   background-color: transparent;
   overflow: hidden;
+  z-index: 1100;
   @media (max-width: 768px) {
     transform: ${props => props.$collapse ? 'translateX(1rem)' : 'translateX(calc(100% + 1rem))'};
     flex-direction: column;
     padding: 1rem 0rem;
     align-items: center;
     justify-content: space-evenly;
-    top: 64px;
+    top: 62px;
     border-left: 2px solid ${COLOR.darkPurple};
     border-bottom: 2px solid ${COLOR.darkPurple};
     border-bottom-left-radius: 3rem;

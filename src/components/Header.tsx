@@ -4,6 +4,8 @@ import styled, { keyframes } from 'styled-components';
 import maskHeader from '../images/mask-header.svg'
 import background from '../images/back.webp'
 import { COLOR } from '../contstants';
+import { motion } from 'framer-motion'
+import SEO from './SEO';
 
 const blink = keyframes`
   to { opacity: 0; }
@@ -12,7 +14,7 @@ const blink = keyframes`
 export const HeaderContainer = styled.header`
   position: relative;
   width: 100%;
-  height: 90vh;
+  min-height: 90vh;
   background-color: white;
   display: flex;
   justify-content: center;
@@ -61,10 +63,13 @@ export default function Header() {
   return (
     <HeaderContainer>
       <TopAnchor id='top'/>
-      <title>KyCodes</title>
-      <meta name="description" content='KyCodes exceeds limits to build progressive and powerful web applications.' />
+      <SEO title='Home'/>
       <StaticImage formats={["webp"]} width={300} loading='eager' placeholder='blurred' src='../images/kycodes-full.png' alt='KyCodes LLC full-size logo'/>
-      <h1>I'm <strong>Kyler</strong>, let's create <strong>powerful web apps</strong><Blink>|</Blink></h1>
+      <motion.h1
+      initial={{opacity: 0, y: 24}}
+      animate={{opacity: 1, y: 0}}
+      transition={{duration: 0.5}}
+      >I'm <strong>Kyler</strong>, let's create <strong>powerful web apps</strong><Blink>|</Blink></motion.h1>
       <RangeHeader />
     </HeaderContainer>
   )

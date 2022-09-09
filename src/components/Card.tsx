@@ -20,7 +20,6 @@ function randomNum(min: number, max: number) {
 export const CardDescription = styled.div`
     position: relative;
     width: 70%;
-    min-height: 100%;
     padding: 16px 24px;
     display: flex;
     flex-direction: column;
@@ -83,12 +82,11 @@ export const CardWrapper = styled.div`
 
 export const CardPreview = styled.div`
     position: relative;
-    display: grid;
     background: silver;
     width: 30%;
-    min-height: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
     overflow: hidden;
     align-items: center;
     @media (max-width: 768px) {
@@ -174,7 +172,7 @@ export default function Card(props: cardProps) {
             </TagContainer>
         </CardDescription>
         <CardPreview>
-            <GatsbyImage alt={props.alt} style={{minHeight: '105%', minWidth: '100%'}} imgStyle={{transition: 'all 0.4s'}} objectFit='cover' image={props.sourceUrl && getImage(props.sourceUrl)} />
+            <GatsbyImage alt={props.alt} style={{minHeight: '105%', minWidth: '100%', maxWidth: '100%', maxHeight: '105%'}} imgStyle={{transition: 'all 0.4s'}} objectFit='cover' image={props.sourceUrl && getImage(props.sourceUrl)} />
         </CardPreview>
     </CardWrapper>
   );
