@@ -55,7 +55,6 @@ const GlobalStyle = createGlobalStyle`
       width: 100%;
       height: 100%;
       scroll-behavior: smooth;
-      overflow-x: clip;
       display: flex;
       flex-direction: column;
   }

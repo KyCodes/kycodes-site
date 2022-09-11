@@ -58,12 +58,24 @@ export const PostContainer = styled.main`
   width: 100%;
 `
 
-export const Content = styled.p`
+export const TopAnchor = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  background: transparent;
+`
 
+export const Content = styled.p`
+  width: 100%;
+  height: 100vh;
 `
 
 export const Summary = styled.div`
-
+  width: 100%;
+  height: 100px;
+  background: black;
 `
 
 export default function PostTemplate({ pageContext }) {
@@ -72,6 +84,7 @@ export default function PostTemplate({ pageContext }) {
     <>
         <GlobalStyle />
         <Nav />
+        <TopAnchor id='top'/>
         <SEO title={pageContext.title} />
         <HeaderContainer>
             <motion.h1

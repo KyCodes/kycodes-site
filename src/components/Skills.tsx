@@ -103,9 +103,9 @@ export const Card = styled.div`
   @media (max-width: 992px) {
       width: 100%;
       margin: -0.5rem -2rem;
-      transform: translateX(-10%);
+      transform: translateX(-8px);
       &:nth-child(odd) {
-        transform: translateX(10%);
+        transform: translateX(8px);
       }
   }
 `;

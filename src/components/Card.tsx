@@ -41,33 +41,33 @@ export const CardWrapper = styled.div`
     height: auto;
     overflow: hidden;
     border: 2px solid black;
-    margin: 1rem auto 1rem -16px;
+    border-left: none;
+    margin: 1rem auto 1rem 0rem;
     transform: translateZ(0px);
-    padding-left: 12px;
-    box-shadow: 6px 6px 0px rgba(0,0,0,0.5);
+    box-shadow: -6px 6px 0px rgba(0,0,0,0.5);
     transition: all 0.2s ease-in-out;
     &:nth-child(even) {
         border-radius: ${randomNum(15,30)}px 0px 0px ${randomNum(15,30)}px / ${randomNum(200,400)}px 0px 0px ${randomNum(200,400)}px;
-        margin: 1rem -16px 1rem auto;
-        box-shadow: -6px 6px 0px rgba(0,0,0,0.5);
-        padding-right: 12px;
-        padding-left: 0px;
+        margin: 1rem 0rem 1rem auto;
+        box-shadow: 6px 6px 0px rgba(0,0,0,0.5);
+        border-left: 2px solid black;
+        border-right: none;
         flex-direction: row-reverse;
         &:hover {
-            transform: translateY(-3px) translateX(3px);
-            box-shadow: -12px 12px 0px rgba(0,0,0,0.5);
+            transform: translateY(-3px);
+            box-shadow: 12px 12px 0px rgba(0,0,0,0.5);
         }
         & a:hover {
-            box-shadow: -4px 4px 0px ${COLOR.lightPurple};
-            transform: translateX(4px) translateY(-4px);
+            box-shadow: 4px 4px 0px ${COLOR.lightPurple};
+            transform: translateX(-4px) translateY(-4px);
         }
         @media (max-width: 768px) {
             flex-direction: column;
         }
     }
     &:hover {
-        transform: translateY(-3px) translateX(-3px);
-        box-shadow: 12px 12px 0px rgba(0,0,0,0.5);
+        transform: translateY(-3px);
+        box-shadow: -12px 12px 0px rgba(0,0,0,0.5);
     }
     &:hover img {
         transform: scale(105%);
@@ -132,7 +132,7 @@ export const TagContainer = styled.div`
     mask-image: linear-gradient(90deg, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
 `;
 
-export const PostLink = styled(Link)`
+export const PostLink = styled.a`
     position: absolute;
     text-transform: uppercase;
     color: ${COLOR.white};
@@ -147,8 +147,8 @@ export const PostLink = styled(Link)`
     cursor: pointer;
     text-decoration: none;
     &:hover {
-        box-shadow: 4px 4px 0px ${COLOR.lightPurple};
-        transform: translateX(-4px) translateY(-4px);
+        box-shadow: -4px 4px 0px ${COLOR.lightPurple};
+        transform: translateX(4px) translateY(-4px);
     }
     &:active {
         box-shadow: none;
@@ -165,7 +165,7 @@ export default function Card(props: cardProps) {
     <CardWrapper>
         <CardDescription>
             <Title>{props.title}</Title>
-            <PostLink to={props.href}>Read More</PostLink>
+            <PostLink href={props.href}>Read More</PostLink>
             <Excerpt dangerouslySetInnerHTML={{__html: props.excerpt}}/>
             <TagContainer>
                 {tags} 
