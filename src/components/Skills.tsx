@@ -133,13 +133,9 @@ export const Tag = styled.p`
 
 
 export default function Skills() {
-  const [design, setDesign] = useState('')
-  const [develop, setDevelop] = useState('')
-  const [deploy, setDeploy] = useState('')
-  const [designTags, setDesignTags] = useState(Function)
-  const [developTags, setDevelopTags] = useState(Function)
-  const [deployTags, setDeployTags] = useState(Function)
-
+  const [design, setDesign] = useState(Object)
+  const [develop, setDevelop] = useState(Object)
+  const [deploy, setDeploy] = useState(Object)
 
   const data = useStaticQuery(graphql`
     {
@@ -167,23 +163,26 @@ export default function Skills() {
     for (let i = 0; i < data.allWpPost.nodes.length; i++) {
       const wpData = data.allWpPost.nodes[i];
       if (wpData.slug == 'design') {
-        setDesign(wpData.content)
-        setDesignTags(wpData.tags.nodes.map((data: any, index: number) =>
-          <Tag key={index}>{data.name}</Tag>
-        ));
+        setDesign({content: wpData.content, tags: wpData.tags.nodes})
       } else if (wpData.slug == 'develop') {
-        setDevelop(wpData.content)
-        setDevelopTags(wpData.tags.nodes.map((data: any, index: number) =>
-          <Tag key={index}>{data.name}</Tag>
-        ));      
+        setDevelop({content: wpData.content, tags: wpData.tags.nodes})
       } else if (wpData.slug == 'deploy') {
-        setDeploy(wpData.content)
-        setDeployTags(wpData.tags.nodes.map((data: any, index: number) =>
-          <Tag key={index}>{data.name}</Tag>
-        ));
+        setDeploy({content: wpData.content, tags: wpData.tags.nodes})
       }
     }
   }, [data])
+
+  const designTags = design.tags?.map((data: any, index: number) =>
+      <Tag key={index}>{data.name}</Tag>
+  );
+
+  const developTags = develop.tags?.map((data: any, index: number) =>
+      <Tag key={index}>{data.name}</Tag>
+  );
+
+  const deployTags = deploy.tags?.map((data: any, index: number) =>
+      <Tag key={index}>{data.name}</Tag>
+  );
 
   return (
     <SkillsContainer>
@@ -192,20 +191,17 @@ export default function Skills() {
         <CardContainer>
           <Card>
               <h3>Design</h3>
-              <p dangerouslySetInnerHTML={{__html: design}} />
-              {/* @ts-ignore */}
+              <p dangerouslySetInnerHTML={{__html: design.content}} />
               <TagContainer>{designTags}</TagContainer>
           </Card>
           <Card>
             <h3>Develop</h3>
-            <p dangerouslySetInnerHTML={{__html: develop}} />
-            {/* @ts-ignore */}
+            <p dangerouslySetInnerHTML={{__html: develop.content}} />
             <TagContainer>{developTags}</TagContainer>
           </Card>
           <Card>
             <h3>Deploy</h3>
-            <p dangerouslySetInnerHTML={{__html: deploy}} />
-            {/* @ts-ignore */}
+            <p dangerouslySetInnerHTML={{__html: deploy.content}} />
             <TagContainer>{deployTags}</TagContainer>
           </Card>
         </CardContainer>
