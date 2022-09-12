@@ -13,6 +13,8 @@ import Footer from '../components/Footer';
 
 export const HeaderContainer = styled.header`
   position: relative;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(5px);
   width: 100%;
   z-index: 10;
   min-height: 90vh;
@@ -131,7 +133,7 @@ export default function PostTemplate({ pageContext }) {
         <Nav />
         <TopAnchor id='top'/>
         <SEO title={pageContext.title} />
-        <GatsbyImage alt={pageContext.imgAlt} style={{height: '110%', width: '110%', position: 'fixed', top: '-5%', left: '-5%', zIndex: 0, display: 'block'}} imgStyle={{filter: 'blur(5px) brightness(25%)'}} objectFit='cover' image={pageContext.imgSrc && getImage(pageContext.imgSrc)} />
+        <GatsbyImage alt={pageContext.imgAlt} style={{height: '110%', width: '110%', position: 'fixed', top: '-5%', left: '-5%', zIndex: 0, display: 'block'}} objectFit='cover' image={pageContext.imgSrc && getImage(pageContext.imgSrc)} />
         <HeaderContainer>
             <motion.h1
             initial={{opacity: 0, y: 24}}
