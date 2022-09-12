@@ -51,6 +51,7 @@ const GlobalStyle = createGlobalStyle`
   body,
   #___gatsby,
   #gatsby-focus-wrapper {
+      position: relative;
       background: #B48EAE;
       width: 100%;
       height: 100%;

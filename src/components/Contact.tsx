@@ -24,8 +24,6 @@ export const ContactContainer = styled.section<contactProps>`
   & h2 {
     border-radius: 0px;
     text-shadow: 2px 2px 0px ${COLOR.darkPurple};
-    background: linear-gradient(0deg, rgba(180,142,174,0) 25%, rgba(180,142,174,1) 25%, rgba(180,142,174,1) 50%, rgba(180,142,174,0) 50%);
-    clip-path: polygon(0 0, 75% 0, 100% 100%, 25% 100%);
     z-index: 20;
     border: none;
     &::before {
@@ -62,7 +60,7 @@ export const ContactContainer = styled.section<contactProps>`
   & form:valid button {
     background: ${props => props.$disabled ?  COLOR.darkPurple : COLOR.lightPurple};
   }
-  & input:not(:placeholder-shown):not(:focus):invalid {
+  & input:nth-of-type(2):not(:placeholder-shown):not(:focus):valid {
     color: pink;
   }
   & input:nth-of-type(2):not(:placeholder-shown):not(:focus):valid {

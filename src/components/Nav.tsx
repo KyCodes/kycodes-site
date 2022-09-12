@@ -20,7 +20,7 @@ export const LogoAnchor = styled.a`
 export const NavBar = styled.nav`
     z-index: 1000;
     height: 64px;
-    background: rgba(255,255,255, 0.7);
+    background: rgba(255,255,255, 0.8);
     backdrop-filter: blur(5px);
     border-bottom: 2px solid #632A50;
     width: 100%;
@@ -64,7 +64,7 @@ export const AnchorWrapper = styled.ul<navProps>`
     border-left: 2px solid ${COLOR.darkPurple};
     border-bottom: 2px solid ${COLOR.darkPurple};
     border-bottom-left-radius: 3rem;
-    background: rgba(255,255,255,0.9);
+    background: rgba(255,255,255,0.8);
     position: fixed;
     width: 40%;
     a {

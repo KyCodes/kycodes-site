@@ -68,7 +68,7 @@ export default function Footer() {
         <a target="_blank" rel="noopener noreferrer" href='https://www.nimh.nih.gov/health/find-help'>Mental Health</a>
       </Socials>
       <Credit>
-        <a href='/#top'>Back to top</a>
+        <a href='#top'>Back to top</a>
         <p>{`KyCodes LLC (${new Date().getFullYear()})`}</p>
       </Credit>
     </FooterContainer>

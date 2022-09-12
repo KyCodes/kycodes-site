@@ -8,10 +8,12 @@ exports.createPages = async ({ graphql, actions }) => {
       allWpPost(filter: {categories: {nodes: {elemMatch: {slug: {eq: "projects"}}}}}) {
         nodes {
           content
+          modified(formatString: "MMM Do YYYY")
           slug
           featuredImage {
             node {
-              sourceUrl
+              altText
+              gatsbyImage(placeholder: BLURRED, aspectRatio: 16.10, width: 800, height: 500, formats: WEBP)
             }
           }
           title
@@ -33,7 +35,10 @@ exports.createPages = async ({ graphql, actions }) => {
       context: {
         content: node.content,
         title: node.title,
-        tags: node.tags.nodes
+        tags: node.tags.nodes,
+        imgAlt: node.featuredImage.node.altText,
+        imgSrc: node.featuredImage.node.gatsbyImage,
+        date: node.modified
       },
     })
   })
