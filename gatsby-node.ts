@@ -9,6 +9,7 @@ exports.createPages = async ({ graphql, actions }) => {
         nodes {
           content
           modified(formatString: "MMM Do YYYY")
+          date(formatString: "MMM Do YYYY")
           slug
           featuredImage {
             node {
@@ -38,7 +39,8 @@ exports.createPages = async ({ graphql, actions }) => {
         tags: node.tags.nodes,
         imgAlt: node.featuredImage.node.altText,
         imgSrc: node.featuredImage.node.gatsbyImage,
-        date: node.modified
+        modified: node.modified,
+        date: node.date
       },
     })
   })

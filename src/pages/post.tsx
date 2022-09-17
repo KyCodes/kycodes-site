@@ -87,7 +87,6 @@ export const Summary = styled.div`
   border: 2px solid black;
   color: ${COLOR.white};
   position: relative;
-  margin-bottom: 2rem;
   z-index: 20;
   background: dimgray;
   & p {
@@ -101,6 +100,9 @@ export const Summary = styled.div`
     flex-direction: column;
     width: 100%;
   }
+  @media (min-width: 768px) {
+    max-height: 200px;
+  }
 `
 
 export const SummaryBlock = styled.div`
@@ -109,6 +111,7 @@ export const SummaryBlock = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  text-align: center;
   &:not(:last-of-type) {
     border-right: 1px dashed black;
   }
@@ -120,12 +123,45 @@ export const SummaryBlock = styled.div`
   }
 `
 
+export const TagContainer = styled.div`
+  z-index: 30;
+  margin-top: -1rem;
+  margin-bottom: 4rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 40vw;
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+`
+
+export const Tag = styled.p`
+  border: 1px solid black;
+  display: inline;
+  cursor: default;
+  box-shadow: 4px 4px 0px rgba(0,0,0,0.5);
+  padding: 4px 8px;
+  margin: 4px;
+  border-radius: 25px;
+  font-size: 0.75rem;
+  background-color: gainsboro;
+  color: black;    
+  font-weight: 500;
+  white-space: nowrap;
+`;
+
 export default function PostTemplate({ pageContext }) {
   function readingTime() {
     const words = pageContext.content?.split(' ').length;
     const wpm = 200;
     return Math.ceil(words / wpm)
   }
+
+  const tags = pageContext.tags?.map((data: any, index: number) =>
+    <Tag key={index}>{data.name}</Tag>
+  );
 
   return (
     <>
@@ -146,18 +182,21 @@ export default function PostTemplate({ pageContext }) {
         <PostContainer>
             <Summary>
               <SummaryBlock>
-                <p>Reading Time</p>
-                <span>{readingTime()} min</span>
-              </SummaryBlock>
-              <SummaryBlock>
-                <p>Last Updated</p>
+                <p>Initial</p>
                 <span>{pageContext.date}</span>
               </SummaryBlock>
               <SummaryBlock>
-                <p>Tags</p>
-                <span>Tags</span>
+                <p>Updated</p>
+                <span>{pageContext.modified}</span>
+              </SummaryBlock>
+              <SummaryBlock>
+                <p>Duration</p>
+                <span>{readingTime()} min</span>
               </SummaryBlock>
             </Summary>
+            <TagContainer>
+              {tags}
+            </TagContainer>
           <Content dangerouslySetInnerHTML={{__html: pageContext.content}} />
         </PostContainer>
         <Footer />
